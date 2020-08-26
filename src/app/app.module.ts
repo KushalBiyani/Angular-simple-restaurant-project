@@ -36,6 +36,7 @@ import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { LoginComponent } from './login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
