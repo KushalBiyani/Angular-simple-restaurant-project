@@ -6,6 +6,7 @@ import { DishService } from '../services/dish.service';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
+
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
@@ -16,7 +17,7 @@ export class DishdetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
-
+  errMess: string;
   commentForm: FormGroup;
   comment: Comment;
 
@@ -47,7 +48,10 @@ export class DishdetailComponent implements OnInit {
   ngOnInit() {
     this.dishService.getDishIds().subscribe((dishIds) => this.dishIds = dishIds);
     this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-        .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+        .subscribe(dish => { this.dish = dish;
+          this.setPrevNext(dish.id);
+        } ,
+        errmess => this.errMess = <any>errmess);
   }
   setPrevNext(dishIds: string) {
     const index = this.dishIds.indexOf(dishIds);
@@ -66,7 +70,8 @@ export class DishdetailComponent implements OnInit {
     });
 
     this.commentForm.valueChanges
-    .subscribe(data => this.onValueChanged(data));
+    .subscribe(data => this.onValueChanged(data) ,
+        errmess => this.errMess = <any>errmess);
 
     this.onValueChanged(); // (re)set validation messages now
   }

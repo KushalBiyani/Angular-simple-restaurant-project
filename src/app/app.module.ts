@@ -35,6 +35,7 @@ import { baseURL } from './shared/baseurl';
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { LoginComponent } from './login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     DishService,
     PromotionService,
     LeaderService,
+    ProcessHTTPMsgService,
     {provide: 'BaseURL', useValue: baseURL}
   ],
   entryComponents: [
